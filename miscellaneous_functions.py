@@ -4,9 +4,7 @@ A place to keep random functions.
 
 
 def spongebob_case(s: str) -> str:
-    """
-    mAkEs tExT LiKe tHiS
-    """
+    """mAkEs tExT LiKe tHiS"""
     lst = [ch for ch in s]
     for i in range(len(lst)):
         char = lst[i]
