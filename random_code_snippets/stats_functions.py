@@ -1,6 +1,7 @@
 from math import factorial as fact
 from math import e
 from decimal import Decimal, getcontext
+
 getcontext().prec = 55
 
 
