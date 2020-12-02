@@ -62,16 +62,16 @@ def _check() -> bool:
     Checks the user implementation for correctness.
     """
     from string import ascii_lowercase
-    random_string = ''.join(random.choice(ascii_lowercase) for _ in range(25))
-    student = longest_substring(random_string)
-    sol = solution(random_string)
-    if student == sol:
-        return True
-    else:
-        print(f'Your solution is incorrect, when run on the following string:\n\n'
-              f'{random_string}\n\n'
-              f'Your solution returned {student} when it should return {sol}.')
-        return False
+    for _ in range(5):
+        random_string = ''.join(random.choice(ascii_lowercase) for _ in range(50))
+        student = longest_substring(random_string)
+        sol = solution(random_string)
+        if student != sol:
+            print(f'Your solution is incorrect, when run on the following string:\n\n'
+                  f'{random_string}\n\n'
+                  f'Your solution returned {student} when it should return {sol}.')
+            return False
+    return True
 
 
 if __name__ == '__main__':
