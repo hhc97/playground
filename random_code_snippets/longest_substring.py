@@ -83,7 +83,7 @@ if __name__ == '__main__':
     reps = 1
     if _check():
         print('Your solution is correct :)\n')
-        print(f'Test mode: {"easy" if TEST_MODE == "easy" else "hard"}')
+        print(f'Test mode: {"easy" if TEST_MODE == "easy" else "hard"}\n')
         student_times = []
         solution_times = []
         for size in tests:
