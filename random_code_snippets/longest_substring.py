@@ -13,9 +13,9 @@ CHARACTERS = [' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '
 
 def longest_substring(s: str) -> int:
     """
-    returns the length of the longest substring in s without repeating characters
+    Returns the length of the longest substring in <s> without repeating characters.
 
-    Example: if the string is 'CSC108' then the longest substring without repeating
+    Example: if <s> is 'CSC108', then the longest substring without repeating
     characters would be 'SC108', so the function should return 5.
 
     Another example:
@@ -42,7 +42,7 @@ def longest_substring(s: str) -> int:
 def solution(s: str) -> int:
     """
     A solution that is fast, but does not use dictionaries.
-    An implementation that uses dictionaries could potentially be 5-10% faster.
+    An implementation that uses dictionaries could be up to 40% faster.
     (Don't copy this! Come up with a solution of your own!)
     """
     longest = 0
@@ -58,7 +58,9 @@ def solution(s: str) -> int:
 
 
 def _check() -> bool:
-    """Checks the implementation for correctness"""
+    """
+    Checks the user implementation for correctness.
+    """
     from string import ascii_lowercase
     random_string = ''.join(random.choice(ascii_lowercase) for _ in range(25))
     student = longest_substring(random_string)
