@@ -1,3 +1,7 @@
+PDBR = 114
+
+INPUTS = ['0x4e32', '0x44dc', '0x773b']
+
 TABLE = """
 frame  0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
 
@@ -264,5 +268,34 @@ def process_table() -> list:
     return tables
 
 
+def hex_to_int(hex_num: str) -> int:
+    return int(hex_num, 16)
+
+
+def bin_concat_to_hex(left: int, right: int) -> str:
+    return hex(int(bin(left)[2:] + bin(right)[2:], 2))
+
+
+def translate(virt: str) -> str:
+    tables = process_table()
+    page_dir = tables[PDBR]
+    virt_addr = bin(int(virt, 16))[2:].rjust(15, '0')
+    page = int(virt_addr[:5], 2)
+    table = int(virt_addr[5:10], 2)
+    offset = int(virt_addr[10:], 2)
+    page = hex_to_int(page_dir[page])
+    if not page & 1 << 7:
+        return 'Fault'
+    page = page & ~(1 << 7)
+    frame_one = tables[page]
+    frame_two = hex_to_int(frame_one[table])
+    if not frame_two & 1 << 7:
+        return 'Fault'
+    frame_two = frame_two & ~(1 << 7)
+    return f'Virtual Address {virt} Translates To Physical Address {bin_concat_to_hex(frame_two, offset)}, ' \
+           f'which holds data value 0x{tables[frame_two][offset].lstrip("0")}'
+
+
 if __name__ == '__main__':
-    print(process_table())
+    for vaddr in INPUTS:
+        print(translate(vaddr))
