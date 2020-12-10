@@ -40,6 +40,12 @@ class FD:
         deps = self.dependents == other.dependents
         return dets and deps
 
+    def get_copy(self) -> FD:
+        """
+        Returns a deep copy of this FD.
+        """
+        return FD(f'{self.get_determinants()}->{self.get_dependents()}')
+
 
 if __name__ == '__main__':
     test = FD(' AB -> CD ')
