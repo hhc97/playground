@@ -19,6 +19,14 @@ class FD:
         deps = ''.join(sorted(list(self.dependents)))
         return f'{dets}->{deps}'
 
+    def __eq__(self, other) -> bool:
+        """
+        Compares if two FDs are equivalent.
+        """
+        dets = self.determinants == other.determinants
+        deps = self.dependents == other.dependents
+        return dets and deps
+
 
 if __name__ == '__main__':
     test = FD(' AB -> CD ')
