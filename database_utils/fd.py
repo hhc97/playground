@@ -12,7 +12,7 @@ class FD:
         """
         attribs = [s.strip() for s in fd.split('->')]
         self.determinants = set(attribs[0])
-        self.dependents = set(attribs[1])
+        self.dependents = set(attribs[1]) - self.determinants
 
     def get_determinants(self) -> str:
         """
