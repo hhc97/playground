@@ -11,7 +11,7 @@ class FD:
         self.determinants = set(attribs[0])
         self.dependents = set(attribs[1])
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Returns the string representation of this FD.
         """
