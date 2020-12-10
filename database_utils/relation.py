@@ -8,15 +8,17 @@ class Relation:
     A class that represents a relation and it's FDs.
     """
 
-    def __init__(self, relation_file: str) -> None:
+    def __init__(self, relation_file: str = '') -> None:
         """
         Parses the relation file to initialize the class properly.
         """
         self.fds = []
-        with open(relation_file, 'r') as f:
-            self.relation = set(f.readline().strip())
-            for line in f:
-                self.fds.append(FD(line))
+        self.relation = set()
+        if relation_file:
+            with open(relation_file, 'r') as f:
+                self.relation = set(f.readline().strip())
+                for line in f:
+                    self.fds.append(FD(line))
 
     def __str__(self) -> str:
         """
