@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 class FD:
     """
     A class representing a functional dependency.
@@ -11,15 +14,25 @@ class FD:
         self.determinants = set(attribs[0])
         self.dependents = set(attribs[1])
 
+    def get_determinants(self) -> str:
+        """
+        Returns the determinants of this FD alphabetically.
+        """
+        return ''.join(sorted(list(self.determinants)))
+
+    def get_dependents(self) -> str:
+        """
+        Returns the dependents of this FD alphabetically.
+        """
+        return ''.join(sorted(list(self.dependents)))
+
     def __str__(self) -> str:
         """
         Returns the string representation of this FD.
         """
-        dets = ''.join(sorted(list(self.determinants)))
-        deps = ''.join(sorted(list(self.dependents)))
-        return f'{dets}->{deps}'
+        return f'{self.get_determinants()}->{self.get_dependents()}'
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: FD) -> bool:
         """
         Compares if two FDs are equivalent.
         """
