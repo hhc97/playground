@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from itertools import chain, combinations
+
 from fd import FD
 from relation import Relation
 
@@ -20,6 +22,45 @@ def _split(rel: Relation, fd: FD) -> tuple:
     new_r2.fds = rel.get_fds_copy()
 
     return new_r1, new_r2
+
+
+def powerset(iterable):
+    """
+    Returns all possible subsets of <iterable>.
+    """
+    s = list(iterable)
+    return chain.from_iterable(combinations(s, t) for t in range(len(s) + 1))
+
+
+def project_dependencies(rel: Relation) -> None:
+    """
+    Update the fds in the relation by projecting them.
+    """
+    new_fds = []
+    supers = []
+    for single in rel.relation:
+        closure = rel.closure({single})
+        fd = FD(f'{single}->{"".join(closure)}')
+        if closure == rel.relation:
+            supers.append(fd)
+        if not closure.issubset({single}):
+            new_fds.append(fd)
+    for s in powerset(rel.relation):
+        redundant = False
+        subset = set(s)
+        for fd in supers:
+            if subset.issuperset(fd.determinants):
+                redundant = True
+                break
+        if redundant or subset == rel.relation or not subset:
+            continue
+        closure = rel.closure(subset)
+        fd = FD(f'{"".join(subset)}->{"".join(closure)}')
+        if closure == rel.relation:
+            supers.append(fd)
+        if not closure.issubset(subset):
+            new_fds.append(fd)
+    rel.fds = new_fds
 
 
 def bcnf(rel: Relation) -> list:
