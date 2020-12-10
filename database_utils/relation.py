@@ -26,17 +26,18 @@ class Relation:
         fds = ', '.join(sorted(str(fd) for fd in self.fds))
         return f'Relation: {rel}\nFDs: {fds}'
 
-    def closure(self, curr_fd: FD) -> set:
+    def closure(self, key: set) -> set:
         """
         Returns the closure of a FD.
         """
-        closure = curr_fd.determinants.copy()
+        closure = key.intersection(self.relation)
         running = True
         while running:
             running = False
             for fd in self.fds:
-                if fd.determinants.issubset(closure) and not fd.dependents.issubset(closure):
-                    closure.update(fd.dependents)
+                deps = fd.dependents.intersection(self.relation)
+                if fd.determinants.issubset(closure) and not deps.issubset(closure):
+                    closure.update(deps)
                     running = True
         return closure
 
@@ -46,7 +47,8 @@ class Relation:
         """
         closures = ['Closures:']
         for fd in self.fds:
-            closures.append(f'{fd.get_determinants()}+ = {"".join(sorted(list(self.closure(fd))))}')
+            closures.append(f'{fd.get_determinants()}+ = '
+                            f'{"".join(sorted(list(self.closure(fd.determinants))))}')
         return '\n'.join(closures)
 
     def get_fds_copy(self) -> list:
