@@ -1,0 +1,5 @@
+ABCDEFGHI
+AEG->F
+B->AD
+AG->HI
+BG->D
