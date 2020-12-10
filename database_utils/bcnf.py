@@ -58,7 +58,7 @@ def project_dependencies(rel: Relation) -> None:
         fd = FD(f'{"".join(subset)}->{"".join(closure)}')
         if closure == rel.relation:
             supers.append(fd)
-        if not closure.issubset(subset):
+        if not closure.issubset(subset) and fd not in new_fds:
             new_fds.append(fd)
     rel.fds = new_fds
 
@@ -76,6 +76,7 @@ def bcnf(rel: Relation) -> list:
                 left = bcnf(left)
                 right = bcnf(right)
                 return left + right
+    project_dependencies(rel)
     return [rel]
 
 
