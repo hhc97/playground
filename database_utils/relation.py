@@ -49,6 +49,12 @@ class Relation:
             closures.append(f'{fd.get_determinants()}+ = {self._closure(fd)}')
         return '\n'.join(closures)
 
+    def get_fds_copy(self) -> list:
+        """
+        Returns a copy of the FDs in this relation.
+        """
+        return [fd.get_copy() for fd in self.fds]
+
 
 if __name__ == '__main__':
     test = Relation('relation_input.txt')
