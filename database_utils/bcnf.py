@@ -40,6 +40,7 @@ def bcnf(rel: Relation) -> list:
 
 if __name__ == '__main__':
     relation = Relation('relation_input.txt')
+    print(relation, '\n')
     decomposed = bcnf(relation)
     print(f'\nFinal number of relations: {len(decomposed)}')
     for i, r in enumerate(decomposed, 1):
