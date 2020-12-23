@@ -1,0 +1,8 @@
+Algorithms and Data Structures
+Computer Organization
+Databases
+Discrete Mathematics
+Operating Systems
+Software Engineering and Design
+Systems Programming
+Theory of Computation
