@@ -1,8 +1,12 @@
-Algorithms and Data Structures
+Data Structures and Analysis
+Algorithm Design, Analysis & Complexity
 Computer Organization
-Databases
+Databases and Database Design
 Discrete Mathematics
 Operating Systems
 Software Engineering and Design
 Systems Programming
 Theory of Computation
+Web Programming
+Introduction to Artificial Intelligence
+Natural Language Computing
