@@ -381,5 +381,5 @@ if __name__ == "__main__":
     #     end = time()
     #     print(f'Input puzzle:\n{puz}')
     #     print(f'\nSolved in {end - start:.4f} seconds.\n')
-    #     print(f'{soln}\n')
+    #     print(f'{soln}\n')#
     convert_and_solve()
