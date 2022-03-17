@@ -216,3 +216,23 @@ def num_diffs(a, b):
         totalPairs = (totalPairs + y * (y - 1) // 2)
 
     return n + totalPairs
+
+
+def min_keypad_count(text: str) -> int:
+    freqs = {}
+    for c in text:
+        freqs[c] = freqs.get(c, 0) + 1
+    freqs = list(freqs.items())
+    freqs.sort(key=lambda x: x[1], reverse=True)
+    counter = 0
+    total = 0
+    print(freqs)
+    for k, f in freqs:
+        cost = counter // 9 + 1
+        total += cost * f
+        counter += 1
+    print(total)
+    return total
+
+
+min_keypad_count('abcghdiefjoba')
