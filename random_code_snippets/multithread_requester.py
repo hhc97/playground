@@ -1,12 +1,14 @@
 import threading
+from time import time
 
 import requests
 
 
 def get_stuff(name: str):
     for i in range(20):
-        r = requests.get('https://spatial-logs.herokuapp.com/test/refresh')
-        print(f'thread {name} did request {i} (response length: {len(r.text)})')
+        start = time()
+        r = requests.get('https://google.com/robots.txt')
+        print(f'thread {name} did request {i} (response length: {len(r.text)}) {time() - start}s')
 
 
 if __name__ == '__main__':
